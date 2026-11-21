@@ -10,6 +10,10 @@ export default defineConfig({
   build: {
     format: 'file'
   },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover'
+  },
   integrations: [
     sitemap({
       filter: (page) => !page.includes('/admin')
