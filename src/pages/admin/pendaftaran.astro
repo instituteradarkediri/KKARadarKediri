@@ -23,7 +23,7 @@ import { DISTRICTS, LEVELS } from "../../data/competition";
       </div>
 
       <div class="dashboard-hero-actions">
-        <button type="button" id="btnExportCsv" class="btn btn-success">
+        <button type="button" id="btnExportCsv" class="btn btn-success" data-role-allow="superadmin,admin">
           <i class="bi bi-file-earmark-excel"></i>
           <span>Ekspor CSV / Excel</span>
         </button>
@@ -1505,6 +1505,13 @@ import { DISTRICTS, LEVELS } from "../../data/competition";
 
     // Export to CSV
     function exportToCSV() {
+      const rawSession = sessionStorage.getItem('kka_admin_session') || localStorage.getItem('kka_admin_session');
+      const session = rawSession ? JSON.parse(rawSession) : null;
+      if (session && session.role === 'verifikator') {
+        alert('Akses Dibatasi: Fitur Ekspor Data hanya dapat diakses oleh Panitia dan Super Admin.');
+        return;
+      }
+
       if (allRegistrations.length === 0) {
         alert("Tidak ada data pendaftaran untuk diekspor.");
         return;

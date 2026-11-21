@@ -98,14 +98,45 @@ const {
     </style>
   </head>
   <body>
-    <!-- Immediate Client-Side Auth Guard: Prevents rendering unauthenticated content -->
+    <!-- Immediate Client-Side Auth Guard: Prevents rendering unauthenticated or unauthorized content -->
     <script is:inline>
       (function() {
         try {
           const auth = sessionStorage.getItem('kka_admin_auth') || localStorage.getItem('kka_admin_auth');
-          const session = sessionStorage.getItem('kka_admin_session') || localStorage.getItem('kka_admin_session');
-          if (auth !== 'true' || !session) {
+          const rawSession = sessionStorage.getItem('kka_admin_session') || localStorage.getItem('kka_admin_session');
+          if (auth !== 'true' || !rawSession) {
             window.location.replace('/admin/login');
+            return;
+          }
+
+          const session = JSON.parse(rawSession);
+          const role = session.role || 'verifikator';
+          const path = window.location.pathname.replace(/\/$/, '');
+
+          // Immediate Page Guard: Verifikator
+          if (role === 'verifikator') {
+            const forbiddenPrefixes = [
+              '/admin/wilayah',
+              '/admin/cms',
+              '/admin/galeri',
+              '/admin/sekolah',
+              '/admin/pengaturan'
+            ];
+            if (forbiddenPrefixes.some(prefix => path === prefix || path.startsWith(prefix + '/'))) {
+              alert('Akses Dibatasi: Peran Verifikator hanya diizinkan untuk Data Pendaftaran.');
+              window.location.replace('/admin/pendaftaran');
+              return;
+            }
+          }
+
+          // Immediate Page Guard: Admin (Panitia)
+          if (role === 'admin') {
+            const forbiddenPrefixes = ['/admin/pengaturan'];
+            if (forbiddenPrefixes.some(prefix => path === prefix || path.startsWith(prefix + '/'))) {
+              alert('Akses Dibatasi: Pengaturan Gelombang & Biaya hanya dapat diakses oleh Super Admin.');
+              window.location.replace('/admin');
+              return;
+            }
           }
         } catch (e) {
           window.location.replace('/admin/login');
@@ -178,31 +209,31 @@ const {
                 <span>Data Pendaftaran</span>
               </a>
             </li>
-            <li>
+            <li data-role-allow="superadmin,admin">
               <a class="dropdown-item" href="/admin/wilayah">
                 <i class="bi bi-geo-alt text-success"></i>
                 <span>Kelola Wilayah & Kuota</span>
               </a>
             </li>
-            <li>
+            <li data-role-allow="superadmin,admin">
               <a class="dropdown-item" href="/admin/sekolah">
                 <i class="bi bi-mortarboard" style="color: #6366f1;"></i>
                 <span>CMS Data Sekolah</span>
               </a>
             </li>
-            <li>
+            <li data-role-allow="superadmin,admin">
               <a class="dropdown-item" href="/admin/cms">
                 <i class="bi bi-newspaper text-warning"></i>
                 <span>CMS Berita & Artikel</span>
               </a>
             </li>
-            <li>
+            <li data-role-allow="superadmin,admin">
               <a class="dropdown-item" href="/admin/galeri">
                 <i class="bi bi-images text-purple" style="color: #8b5cf6;"></i>
                 <span>CMS Galeri Foto</span>
               </a>
             </li>
-            <li>
+            <li data-role-allow="superadmin">
               <a class="dropdown-item" href="/admin/pengaturan">
                 <i class="bi bi-sliders text-secondary"></i>
                 <span>Pengaturan Gelombang</span>
@@ -275,7 +306,7 @@ const {
           </li>
 
           <!-- Item 3: Kelola Wilayah & Kuota -->
-          <li class="nav-item">
+          <li class="nav-item" data-role-allow="superadmin,admin">
             <a class={`nav-link ${activeMenu === 'wilayah' ? 'active' : ''}`} href="/admin/wilayah">
               <i class="bi bi-geo-alt"></i>
               <span>Kelola Wilayah & Kuota</span>
@@ -283,12 +314,12 @@ const {
           </li>
 
           <!-- Category Divider 1: CMS -->
-          <li class="nav-heading">
+          <li class="nav-heading" data-role-allow="superadmin,admin">
             <span>CONTENT MANAGEMENT (CMS)</span>
           </li>
 
           <!-- Item 4: CMS Berita & Artikel -->
-          <li class="nav-item">
+          <li class="nav-item" data-role-allow="superadmin,admin">
             <a class={`nav-link ${activeMenu === 'cms' ? 'active' : ''}`} href="/admin/cms">
               <i class="bi bi-newspaper"></i>
               <span>CMS Berita & Artikel</span>
@@ -296,7 +327,7 @@ const {
           </li>
 
           <!-- Item 5: CMS Galeri Foto -->
-          <li class="nav-item">
+          <li class="nav-item" data-role-allow="superadmin,admin">
             <a class={`nav-link ${activeMenu === 'galeri' ? 'active' : ''}`} href="/admin/galeri">
               <i class="bi bi-images"></i>
               <span>CMS Galeri Foto</span>
@@ -304,7 +335,7 @@ const {
           </li>
 
           <!-- Item 6: CMS Data Sekolah -->
-          <li class="nav-item">
+          <li class="nav-item" data-role-allow="superadmin,admin">
             <a class={`nav-link ${activeMenu === 'sekolah' ? 'active' : ''}`} href="/admin/sekolah">
               <i class="bi bi-mortarboard"></i>
               <span>CMS Data Sekolah</span>
@@ -312,12 +343,12 @@ const {
           </li>
 
           <!-- Category Divider 2: PENGATURAN -->
-          <li class="nav-heading">
+          <li class="nav-heading" data-role-allow="superadmin">
             <span>PENGATURAN SISTEM</span>
           </li>
 
-          <!-- Item 6: Pengaturan Biaya & Gelombang -->
-          <li class="nav-item">
+          <!-- Item 7: Pengaturan Biaya & Gelombang -->
+          <li class="nav-item" data-role-allow="superadmin">
             <a class={`nav-link ${activeMenu === 'pengaturan' ? 'active' : ''}`} href="/admin/pengaturan">
               <i class="bi bi-sliders"></i>
               <span>Gelombang & Biaya</span>
@@ -424,6 +455,19 @@ const {
 
           if (avatarEl) avatarEl.textContent = initials;
           if (dropdownAvatarEl) dropdownAvatarEl.textContent = initials;
+
+          // Terapkan Role-Based Access Control (RBAC) pada Menu Navigasi
+          const userRole = session.role || 'verifikator';
+          document.querySelectorAll('[data-role-allow]').forEach((el: any) => {
+            const allowedRoles = (el.getAttribute('data-role-allow') || '')
+              .split(',')
+              .map((r: string) => r.trim());
+            if (!allowedRoles.includes(userRole)) {
+              el.classList.add('d-none');
+            } else {
+              el.classList.remove('d-none');
+            }
+          });
 
           // Strict Live Check against Supabase Database Table admin_users
           if (session.id && !session.is_fallback) {

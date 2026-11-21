@@ -265,14 +265,16 @@
             if (error) {
               console.warn('[Auth Check Error]:', error);
               
-              // Fallback darurat internal jika tabel belum siap
-              const emergencyUsers = ['admin', 'panitia'];
-              const emergencyPasses = ['kka2026radarkediri', 'kka2026', 'admin123'];
-              if (emergencyUsers.includes(user.toLowerCase()) && emergencyPasses.includes(pass)) {
+              // Fallback darurat internal jika tabel database sementara offline
+              const isEmergencyValid = 
+                user.trim().toLowerCase() === 'superadmin.kka' && 
+                pass === 'KKA#Radar2027!Pro.';
+
+              if (isEmergencyValid) {
                 const sessionData = {
                   id: 'fallback-superadmin-id',
-                  username: user,
-                  nama: 'Super Admin KKA',
+                  username: 'superadmin.kka',
+                  nama: 'Super Admin Radar Kediri',
                   role: 'superadmin',
                   is_fallback: true,
                   loginAt: Date.now()
