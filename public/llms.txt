@@ -21,17 +21,17 @@
 - Rekening Pembayaran Resmi: Bank BRI Cabang Kediri (0033-0100-3455-560 a.n. Heri Muda Setiawan)
 - Layanan Cek Status: Verifikasi status pembayaran dan data peserta secara real-time via kode registrasi (contoh: KKA26-M-KOT-1234).
 
-## Navigasi Tautan Penting
-- Halaman Utama: https://kkaradarkediri.com/
-- Panduan Pendaftaran: https://kkaradarkediri.com/daftar
-- Pendaftaran Mandiri: https://kkaradarkediri.com/daftar/mandiri
-- Pendaftaran Kolektif Sekolah: https://kkaradarkediri.com/daftar/kolektif
-- Cek Status Pendaftaran: https://kkaradarkediri.com/daftar/status
-- Pencarian Data Peserta Resmi: https://kkaradarkediri.com/daftar/peserta
-- Regulasi & Petunjuk Teknis: https://kkaradarkediri.com/regulasi
-- Tentang KKA & Latar Belakang: https://kkaradarkediri.com/tentang-kka
-- Berita & Artikel Edukasi: https://kkaradarkediri.com/artikel
-- Kontak & Sekretariat Panitia: https://kkaradarkediri.com/kontak
+## Halaman Utama & Panduan
+- [Halaman Utama](https://kkaradarkediri.com): Halaman beranda resmi Kompetisi Kompetensi Akademik (KKA) 2026.
+- [Panduan Pendaftaran](https://kkaradarkediri.com/daftar): Panduan lengkap alur pendaftaran mandiri dan kolektif.
+- [Pendaftaran Mandiri](https://kkaradarkediri.com/daftar/mandiri): Formulir registrasi mandiri untuk siswa perorangan.
+- [Pendaftaran Kolektif](https://kkaradarkediri.com/daftar/kolektif): Pendaftaran rombongan sekolah via template Excel resmi.
+- [Cek Status Pendaftaran](https://kkaradarkediri.com/daftar/status): Layanan verifikasi status pendaftaran dan pembayaran real-time.
+- [Daftar Peserta Terverifikasi](https://kkaradarkediri.com/daftar/peserta): Pencarian database peserta terdaftar dan terverifikasi.
+- [Regulasi & Petunjuk Teknis](https://kkaradarkediri.com/regulasi): Syarat, ketentuan lomba, silabus materi, dan jadwal kompetisi.
+- [Tentang KKA & Latar Belakang](https://kkaradarkediri.com/tentang-kka): Informasi penyelenggara, visi, misi, dan standar TKA Neutron.
+- [Artikel & Berita Edukasi](https://kkaradarkediri.com/artikel): Kabar berita dan publikasi seputar KKA Radar Kediri.
+- [Kontak & Sekretariat](https://kkaradarkediri.com/kontak): Alamat sekretariat Graha Pena Radar Kediri dan kontak panitia.
 
 ## Kontak Sekretariat Panitia
 - Kantor: Gedung Graha Pena Radar Kediri, Jl. Brawijaya No. 27 D, Kota Kediri, Jawa Timur 64129

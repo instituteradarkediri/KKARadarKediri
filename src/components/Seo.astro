@@ -22,6 +22,8 @@ const {
 const cleanPathname = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
 const canonicalURL = canonical || new URL(cleanPathname, Astro.site || 'https://kkaradarkediri.com').href;
 const fullOgImage = new URL(ogImage, Astro.site || 'https://kkaradarkediri.com').href;
+const isPng = fullOgImage.toLowerCase().endsWith('.png');
+const imageMimeType = isPng ? 'image/png' : 'image/jpeg';
 
 // Default WebPage Schema for subpages without a custom schema
 const defaultWebPageSchema = !schema && !noindex ? {
@@ -68,9 +70,9 @@ const defaultWebPageSchema = !schema && !noindex ? {
 <meta property="og:description" content={description} />
 <meta property="og:image" content={fullOgImage} />
 <meta property="og:image:secure_url" content={fullOgImage} />
-<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:type" content={imageMimeType} />
 <meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="675" />
+<meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content={title} />
 <meta property="og:locale" content="id_ID" />
 <meta property="og:site_name" content="KKA Jawa Pos Radar Kediri" />
