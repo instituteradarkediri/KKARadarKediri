@@ -1,10 +1,12 @@
 ---
-const currentPath = Astro.url.pathname;
-const isHome = currentPath === '/' || currentPath === '';
+const rawPath = Astro.url.pathname;
+const currentPath = rawPath.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const isHome = currentPath === '/' || currentPath === '/index' || currentPath === '';
 
 const isActive = (href: string) => {
   if (href === '/') return isHome;
-  return currentPath.startsWith(href);
+  const cleanHref = href.replace(/\/$/, '') || '/';
+  return currentPath === cleanHref || currentPath.startsWith(cleanHref + '/');
 };
 
 const isInfoActive = currentPath.startsWith('/daftar') || currentPath.startsWith('/cek-status');
