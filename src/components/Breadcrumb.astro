@@ -24,13 +24,15 @@ const fullItems: BreadcrumbItem[] = [
 
 // Generate Schema.org BreadcrumbList
 const siteUrl = 'https://kkaradarkediri.com';
-const currentCanonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const cleanPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const currentCanonicalUrl = new URL(cleanPath, siteUrl).href;
 const schemaData = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: fullItems.map((item, index) => {
+    const rawHref = item.href ? item.href.replace(/\/$/, '') : '';
     const itemUrl = item.href 
-      ? (item.href.startsWith('http') ? item.href : `${siteUrl}${item.href}`)
+      ? (item.href.startsWith('http') ? rawHref : `${siteUrl}${rawHref}`)
       : currentCanonicalUrl;
 
     return {

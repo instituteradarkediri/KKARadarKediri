@@ -19,7 +19,8 @@ const {
   schema
 } = Astro.props;
 
-const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site || 'https://kkaradarkediri.com').href;
+const cleanPathname = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const canonicalURL = canonical || new URL(cleanPathname, Astro.site || 'https://kkaradarkediri.com').href;
 const fullOgImage = new URL(ogImage, Astro.site || 'https://kkaradarkediri.com').href;
 
 // Default WebPage Schema for subpages without a custom schema

@@ -23,15 +23,15 @@
 
 ## Navigasi Tautan Penting
 - Halaman Utama: https://kkaradarkediri.com/
-- Panduan Pendaftaran: https://kkaradarkediri.com/daftar/
-- Pendaftaran Mandiri: https://kkaradarkediri.com/daftar/mandiri/
-- Pendaftaran Kolektif Sekolah: https://kkaradarkediri.com/daftar/kolektif/
-- Cek Status Pendaftaran: https://kkaradarkediri.com/daftar/status/
-- Pencarian Data Peserta Resmi: https://kkaradarkediri.com/daftar/peserta/
-- Regulasi & Petunjuk Teknis: https://kkaradarkediri.com/regulasi/
-- Tentang KKA & Latar Belakang: https://kkaradarkediri.com/tentang-kka/
-- Berita & Artikel Edukasi: https://kkaradarkediri.com/artikel/
-- Kontak & Sekretariat Panitia: https://kkaradarkediri.com/kontak/
+- Panduan Pendaftaran: https://kkaradarkediri.com/daftar
+- Pendaftaran Mandiri: https://kkaradarkediri.com/daftar/mandiri
+- Pendaftaran Kolektif Sekolah: https://kkaradarkediri.com/daftar/kolektif
+- Cek Status Pendaftaran: https://kkaradarkediri.com/daftar/status
+- Pencarian Data Peserta Resmi: https://kkaradarkediri.com/daftar/peserta
+- Regulasi & Petunjuk Teknis: https://kkaradarkediri.com/regulasi
+- Tentang KKA & Latar Belakang: https://kkaradarkediri.com/tentang-kka
+- Berita & Artikel Edukasi: https://kkaradarkediri.com/artikel
+- Kontak & Sekretariat Panitia: https://kkaradarkediri.com/kontak
 
 ## Kontak Sekretariat Panitia
 - Kantor: Gedung Graha Pena Radar Kediri, Jl. Brawijaya No. 27 D, Kota Kediri, Jawa Timur 64129
