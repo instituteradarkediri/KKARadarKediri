@@ -120,7 +120,8 @@ const {
               '/admin/cms',
               '/admin/galeri',
               '/admin/sekolah',
-              '/admin/pengaturan'
+              '/admin/pengaturan',
+              '/admin/pengguna'
             ];
             if (forbiddenPrefixes.some(prefix => path === prefix || path.startsWith(prefix + '/'))) {
               alert('Akses Dibatasi: Peran Verifikator hanya diizinkan untuk Data Pendaftaran.');
@@ -131,9 +132,9 @@ const {
 
           // Immediate Page Guard: Admin (Panitia)
           if (role === 'admin') {
-            const forbiddenPrefixes = ['/admin/pengaturan'];
+            const forbiddenPrefixes = ['/admin/pengaturan', '/admin/pengguna'];
             if (forbiddenPrefixes.some(prefix => path === prefix || path.startsWith(prefix + '/'))) {
-              alert('Akses Dibatasi: Pengaturan Gelombang & Biaya hanya dapat diakses oleh Super Admin.');
+              alert('Akses Dibatasi: Halaman ini hanya dapat diakses oleh Super Admin.');
               window.location.replace('/admin');
               return;
             }
@@ -165,10 +166,10 @@ const {
 
       <!-- Header Right -->
       <div class="header-right">
-        <!-- Live Supabase Status Badge -->
+        <!-- Live System Status Badge -->
         <div class="d-none d-md-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-success-subtle text-success border border-success-subtle fs-8 fw-semibold me-2">
           <span class="pulse-indicator"></span>
-          <span>Supabase Terhubung</span>
+          <span>Sistem Terhubung</span>
         </div>
 
         <!-- Global Refresh Button -->
@@ -237,6 +238,12 @@ const {
               <a class="dropdown-item" href="/admin/pengaturan">
                 <i class="bi bi-sliders text-secondary"></i>
                 <span>Pengaturan Gelombang</span>
+              </a>
+            </li>
+            <li data-role-allow="superadmin">
+              <a class="dropdown-item" href="/admin/pengguna">
+                <i class="bi bi-person-gear text-primary"></i>
+                <span>Kelola Akun Petugas</span>
               </a>
             </li>
             <li>
@@ -355,6 +362,14 @@ const {
             </a>
           </li>
 
+          <!-- Item 8: Kelola Akun & Petugas -->
+          <li class="nav-item" data-role-allow="superadmin">
+            <a class={`nav-link ${activeMenu === 'pengguna' ? 'active' : ''}`} href="/admin/pengguna">
+              <i class="bi bi-person-gear"></i>
+              <span>Kelola Akun Petugas</span>
+            </a>
+          </li>
+
           <!-- Category Divider 3: AKSES PUBLIK -->
           <li class="nav-heading">
             <span>AKSES PUBLIK</span>
@@ -443,7 +458,7 @@ const {
           if (nameEl) nameEl.textContent = displayName;
           if (subRoleEl) subRoleEl.textContent = `@${session.username} • ${displayRole}`;
           if (dropdownNameEl) dropdownNameEl.textContent = displayName;
-          if (dropdownRoleEl) dropdownRoleEl.textContent = `${displayRole} • Supabase`;
+          if (dropdownRoleEl) dropdownRoleEl.textContent = `${displayRole} • Panitia KKA`;
 
           const initials = displayName
             .split(' ')
@@ -481,7 +496,7 @@ const {
             if (error) {
               console.warn('[Admin Auth] Supabase check:', error.message);
             } else if (!dbUser) {
-              alert('Sesi ditutup: Akun Anda telah dinonaktifkan atau dihapus dari database Supabase.');
+              alert('Sesi ditutup: Akun Anda telah dinonaktifkan atau dihapus dari sistem database.');
               sessionStorage.clear();
               localStorage.removeItem('kka_admin_auth');
               localStorage.removeItem('kka_admin_session');
